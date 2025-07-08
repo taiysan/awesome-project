@@ -1,6 +1,6 @@
 import { StyleSheet, View, type ImageSourcePropType } from 'react-native';
 import { Text, ImageHorizontalList } from '@shared/ui';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 type Props = {
   title: string;
@@ -10,7 +10,7 @@ type Props = {
 
 export const ProductCard = memo((props: Props) => {
   const { title, description, images } = props;
-  const imageSources: ImageSourcePropType = images.map(uri => ({ uri }));
+  const imageSources = useMemo<ImageSourcePropType[]>(() => images.map(uri => ({ uri })), [images]);
 
   return (
     <View style={styles.container}>
